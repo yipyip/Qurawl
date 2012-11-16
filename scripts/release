@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ -z $1 ]
+then
+    echo "Usage release <tag>" 
+    exit 0
+fi
+
+tag=$1
+name=qurawl_${tag}
+path=`realpath $0`
+root=`dirname $path`"/.."
+cd $root
+bzr commit -m "Release "${tag} --unchanged
+bzr branch . ../tags/qurawl_${tag}
+bzr export ../tags/${name}".zip"
+ 
